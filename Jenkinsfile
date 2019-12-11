@@ -5,25 +5,25 @@ pipeline {
     stages {
         stage('Build feature') {
             steps {
-                echo "Hello World!"
-            }
-            when {
-                branch 'feat/*'
-            }
-        }
-        stage('Test feature') {
-            steps {
 	        checkout scm
-		sh 'ls -l'
-		sh 'ls -lR'
-		input 'Feature good ?'
+                echo "Hello World!"
+            }
+            when {
+	        anyOf {
+                    branch 'feat/*'
+		    branch 'develop'
+		}
+            }
+        }
+        stage('Deploy Dev') {
+            steps {
                 echo "Hello World!"
             }
             when {
                 branch 'feat/*'
             }
         }
-        stage('Build develop') {
+        stage('Build Qual') {
             steps {
                 echo "Hello World!"
             }
@@ -32,12 +32,12 @@ pipeline {
             }
         }
         stage('Release candidate') {
-            when {
-                branch 'master'
-            }
             steps {
                 input 'Release candidate ?'
                 echo "Hello World!"
+            }
+            when {
+                branch 'develop'
             }
         }
         stage('Deploy Preprod') {
