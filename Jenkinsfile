@@ -76,7 +76,7 @@ pipeline {
                 input 'Release candidate ?'
             }
             when {
-	        buildingTag()
+                branch 'master'
             }
         }
         stage('Deploy production') {
