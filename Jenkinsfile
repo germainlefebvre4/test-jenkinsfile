@@ -76,7 +76,7 @@ pipeline {
                 input 'Release candidate ?'
             }
             when {
-                branch 'master'
+	        buildingTag()
             }
         }
         stage('Deploy production') {
@@ -85,7 +85,7 @@ pipeline {
                 echo "Hello World!"
             }
             when {
-                branch 'master'
+	        buildingTag()
             }
         }
     }
