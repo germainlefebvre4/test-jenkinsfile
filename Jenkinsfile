@@ -8,11 +8,11 @@ pipeline {
                 echo "Hello World!"
             }
             when {
-	        anyOf {
+	              anyOf {
                     branch 'feat/*'
-		    branch 'hotfix/*'
-		    branch 'develop'
-		}
+		                branch 'hotfix/*'
+		                branch 'develop'
+		            }
             }
         }
         stage('Build') {
@@ -21,11 +21,11 @@ pipeline {
                 echo "Hello World!"
             }
             when {
-	        anyOf {
+	              anyOf {
                     branch 'feat/*'
-		    branch 'hotfix/*'
-		    branch 'develop'
-		}
+		                branch 'hotfix/*'
+		                branch 'develop'
+		            }
             }
         }
         stage('Deploy Dev') {
@@ -38,6 +38,7 @@ pipeline {
         }
         stage('Deploy Qual') {
             steps {
+                input 'Deploy in Qualif ?'
                 echo "Hello World!"
             }
             when {
@@ -54,6 +55,7 @@ pipeline {
         }
         stage('Deploy Preprod') {
             steps {
+                input 'Deploy in Pre-production ?'
                 echo "Hello World!"
             }
             when {
@@ -73,15 +75,16 @@ pipeline {
                 input 'Release candidate ?'
             }
             when {
-                branch 'master'
+	              buildingTag()
             }
         }
         stage('Deploy production') {
             steps {
+                input 'Deploy in Production ?'
                 echo "Hello World!"
             }
             when {
-                branch 'master'
+	              buildingTag()
             }
         }
     }
