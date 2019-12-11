@@ -1,15 +1,56 @@
 pipeline {
     agent any
     stages {
-        stage('build') {
+        stage('Feat build') {
             steps {
                 echo "Hello World!"
-                sh "echo Hello from the shell"
-                sh "hostname"
-                sh "uptime"
             }
             when {
-                branch 'fix/*'
+                branch 'feat/*'
+            }
+        }
+        stage('Develop build') {
+            steps {
+                echo "Hello World!"
+            }
+            when {
+                branch 'develop'
+            }
+        }
+        stage('Release candidate') {
+            input 'Release candidate ?'
+            when {
+                branch 'master'
+            }
+        }
+        stage('Preprod deploy') {
+            steps {
+                echo "Hello World!"
+            }
+            when {
+                branch 'master'
+            }
+        }
+        stage('Release stable') {
+            input 'Release stable ?'
+            when {
+                branch 'master'
+            }
+        }
+        stage('Deploy production') {
+            steps {
+                echo "Hello World!"
+            }
+            when {
+                branch 'master'
+            }
+        }
+        stage('Hotfix build') {
+            steps {
+                echo "Hello World!"
+            }
+            when {
+                branch 'hotfix/*'
             }
         }
     }
