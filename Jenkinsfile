@@ -5,6 +5,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
+	        checkout scm
                 echo "Hello World!"
             }
             when {
@@ -38,6 +39,7 @@ pipeline {
         }
         stage('Deploy Qual') {
             steps {
+                input 'Deploy in Qualif ?'
                 echo "Hello World!"
             }
             when {
@@ -54,6 +56,7 @@ pipeline {
         }
         stage('Deploy Preprod') {
             steps {
+                input 'Deploy in Pre-production ?'
                 echo "Hello World!"
             }
             when {
@@ -73,15 +76,16 @@ pipeline {
                 input 'Release candidate ?'
             }
             when {
-                branch 'master'
+	        buildingTag()
             }
         }
         stage('Deploy production') {
             steps {
+                input 'Deploy in Production ?'
                 echo "Hello World!"
             }
             when {
-                branch 'master'
+	        buildingTag()
             }
         }
     }
