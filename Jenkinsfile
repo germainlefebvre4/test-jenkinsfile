@@ -35,7 +35,10 @@ pipeline {
             }
         }
         stage('Release stable') {
-            input 'Release stable ?'
+            input {
+                message 'Release candidate ?'
+		ok 'Yes'
+	    }
             when {
                 branch 'master'
             }
