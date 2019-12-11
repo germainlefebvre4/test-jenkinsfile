@@ -18,7 +18,10 @@ pipeline {
             }
         }
         stage('Release candidate') {
-            input 'Release candidate ?'
+            input {
+                message 'Release candidate ?'
+		ok 'Yes'
+	    }
             when {
                 branch 'master'
             }
