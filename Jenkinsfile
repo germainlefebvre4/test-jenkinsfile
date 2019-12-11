@@ -22,6 +22,9 @@ pipeline {
                 message 'Release candidate ?'
 		ok 'Yes'
 	    }
+            steps {
+                echo "Hello World!"
+            }
             when {
                 branch 'master'
             }
@@ -39,6 +42,9 @@ pipeline {
                 message 'Release candidate ?'
 		ok 'Yes'
 	    }
+            steps {
+                echo "Hello World!"
+            }
             when {
                 branch 'master'
             }
