@@ -3,7 +3,7 @@ pipeline {
         label 'jenkins-agent'
     }
     stages {
-        stage('Feat build') {
+        stage('Build feature') {
             steps {
                 echo "Hello World!"
             }
@@ -11,7 +11,16 @@ pipeline {
                 branch 'feat/*'
             }
         }
-        stage('Develop build') {
+        stage('Test feature') {
+            steps {
+                echo "Hello World!"
+		input 'Feature good ?'
+            }
+            when {
+                branch 'feat/*'
+            }
+        }
+        stage('Build feature') {
             steps {
                 echo "Hello World!"
             }
@@ -36,7 +45,7 @@ pipeline {
                 branch 'master'
             }
         }
-        stage('Hotfix build') {
+        stage('Build hotfix') {
             steps {
                 echo "Hello World!"
             }
