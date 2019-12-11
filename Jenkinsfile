@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'jenkins-agent'
+    }
     stages {
         stage('Feat build') {
             steps {
