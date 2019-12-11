@@ -20,7 +20,7 @@ pipeline {
                 branch 'feat/*'
             }
         }
-        stage('Build feature') {
+        stage('Build develop') {
             steps {
                 echo "Hello World!"
             }
