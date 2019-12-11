@@ -18,10 +18,17 @@ pipeline {
             }
         }
         stage('Release candidate') {
+            when {
+                branch 'master'
+            }
             input {
                 message 'Release candidate ?'
-		ok 'Yes'
 	    }
+            steps {
+                echo "Hello World!"
+            }
+        }
+        stage('Deploy Preprod') {
             steps {
                 echo "Hello World!"
             }
@@ -29,18 +36,17 @@ pipeline {
                 branch 'master'
             }
         }
-        stage('Preprod deploy') {
+        stage('Hotfix build') {
             steps {
                 echo "Hello World!"
             }
             when {
-                branch 'master'
+                branch 'hotfix/*'
             }
         }
         stage('Release stable') {
             input {
                 message 'Release candidate ?'
-		ok 'Yes'
 	    }
             steps {
                 echo "Hello World!"
@@ -55,14 +61,6 @@ pipeline {
             }
             when {
                 branch 'master'
-            }
-        }
-        stage('Hotfix build') {
-            steps {
-                echo "Hello World!"
-            }
-            when {
-                branch 'hotfix/*'
             }
         }
     }
