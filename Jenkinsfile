@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'jenkins-agent'
+        label "jenkins-agent"
     }
     stages {
         stage('Build feature') {
