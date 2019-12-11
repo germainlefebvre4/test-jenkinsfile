@@ -9,7 +9,7 @@ pipeline {
                 sh "uptime"
             }
             when {
-                branch 'feat/*'
+                branch 'fix/*'
             }
         }
     }
