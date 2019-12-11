@@ -23,9 +23,7 @@ pipeline {
             }
             steps {
                 echo "Hello World!"
-                input {
-                    message 'Release candidate ?'
-                }
+                input 'Release candidate ?'
             }
         }
         stage('Deploy Preprod') {
