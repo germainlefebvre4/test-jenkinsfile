@@ -21,11 +21,11 @@ pipeline {
             when {
                 branch 'master'
             }
-            input {
-                message 'Release candidate ?'
-	    }
             steps {
                 echo "Hello World!"
+                input {
+                    message 'Release candidate ?'
+                }
             }
         }
         stage('Deploy Preprod') {
