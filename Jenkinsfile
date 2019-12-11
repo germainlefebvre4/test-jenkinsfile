@@ -13,8 +13,23 @@ pipeline {
         }
         stage('Test feature') {
             steps {
-                echo "Hello World!"
+                checkout scm: [
+                    $class: 'GitSCM',
+                    branches: scm.branches,
+                    doGenerateSubmoduleConfigurations: false,
+                    extensions: [[$class: 'SubmoduleOption',
+                                  disableSubmodules: false,
+                                  parentCredentials: false,
+                                  recursiveSubmodules: true,
+                                  reference: '',
+                                  trackingSubmodules: false]],
+                    submoduleCfg: [],
+                    userRemoteConfigs: scm.userRemoteConfigs
+                ]
+		sh 'ls -l'
+		sh 'ls -lR'
 		input 'Feature good ?'
+                echo "Hello World!"
             }
             when {
                 branch 'feat/*'
@@ -33,8 +48,8 @@ pipeline {
                 branch 'master'
             }
             steps {
-                echo "Hello World!"
                 input 'Release candidate ?'
+                echo "Hello World!"
             }
         }
         stage('Deploy Preprod') {
@@ -54,10 +69,8 @@ pipeline {
             }
         }
         stage('Release stable') {
-            input {
-                message 'Release candidate ?'
-	    }
             steps {
+                input 'Release candidate ?'
                 echo "Hello World!"
             }
             when {
