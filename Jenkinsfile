@@ -3,7 +3,19 @@ pipeline {
         label "jenkins-agent"
     }
     stages {
-        stage('Build feature') {
+        stage('Test') {
+            steps {
+                echo "Hello World!"
+            }
+            when {
+	        anyOf {
+                    branch 'feat/*'
+		    branch 'hotfix/*'
+		    branch 'develop'
+		}
+            }
+        }
+        stage('Build') {
             steps {
 	        checkout scm
                 echo "Hello World!"
@@ -11,6 +23,7 @@ pipeline {
             when {
 	        anyOf {
                     branch 'feat/*'
+		    branch 'hotfix/*'
 		    branch 'develop'
 		}
             }
@@ -23,7 +36,7 @@ pipeline {
                 branch 'feat/*'
             }
         }
-        stage('Build Qual') {
+        stage('Deploy Qual') {
             steps {
                 echo "Hello World!"
             }
@@ -34,7 +47,6 @@ pipeline {
         stage('Release candidate') {
             steps {
                 input 'Release candidate ?'
-                echo "Hello World!"
             }
             when {
                 branch 'develop'
@@ -48,7 +60,7 @@ pipeline {
                 branch 'master'
             }
         }
-        stage('Build hotfix') {
+        stage('Deploy Hotfix') {
             steps {
                 echo "Hello World!"
             }
@@ -59,7 +71,6 @@ pipeline {
         stage('Release stable') {
             steps {
                 input 'Release candidate ?'
-                echo "Hello World!"
             }
             when {
                 branch 'master'
