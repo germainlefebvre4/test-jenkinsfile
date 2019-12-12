@@ -5,27 +5,28 @@ pipeline {
     stages {
         stage('Test') {
             steps {
+                checkout scm
                 echo "Hello World!"
             }
             when {
-	              anyOf {
+                anyOf {
                     branch 'feat/*'
-		                branch 'hotfix/*'
-		                branch 'develop'
-		            }
+                    branch 'hotfix/*'
+                    branch 'develop'
+                }
             }
         }
         stage('Build') {
             steps {
-	        checkout scm
+                checkout scm
                 echo "Hello World!"
             }
             when {
-	              anyOf {
+                anyOf {
                     branch 'feat/*'
-		                branch 'hotfix/*'
-		                branch 'develop'
-		            }
+                    branch 'hotfix/*'
+                    branch 'develop'
+                }
             }
         }
         stage('Deploy Dev') {
@@ -38,7 +39,9 @@ pipeline {
         }
         stage('Deploy Qual') {
             steps {
-                input 'Deploy in Qualif ?'
+                timeout(time: 60, unit: 'SECONDS') {
+                    input 'Deploy in Qualif ?'
+                }
                 echo "Hello World!"
             }
             when {
@@ -84,7 +87,7 @@ pipeline {
                 echo "Hello World!"
             }
             when {
-	              buildingTag()
+                buildingTag()
             }
         }
     }
