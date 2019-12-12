@@ -5,28 +5,28 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-	        checkout scm
+                checkout scm
                 echo "Hello World!"
             }
             when {
-	        anyOf {
+                anyOf {
                     branch 'feat/*'
-		    branch 'hotfix/*'
-		    branch 'develop'
-		}
+                    branch 'hotfix/*'
+                    branch 'develop'
+                }
             }
         }
         stage('Build') {
             steps {
-	        checkout scm
+                checkout scm
                 echo "Hello World!"
             }
             when {
-	        anyOf {
+                anyOf {
                     branch 'feat/*'
-		    branch 'hotfix/*'
-		    branch 'develop'
-		}
+                    branch 'hotfix/*'
+                    branch 'develop'
+                }
             }
         }
         stage('Deploy Dev') {
@@ -85,7 +85,7 @@ pipeline {
                 echo "Hello World!"
             }
             when {
-	        buildingTag()
+                buildingTag()
             }
         }
     }
