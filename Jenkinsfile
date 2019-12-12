@@ -39,7 +39,9 @@ pipeline {
         }
         stage('Deploy Qual') {
             steps {
-                input 'Deploy in Qualif ?'
+                timeout(time: 60, unit: 'SECONDS') {
+                    input 'Deploy in Qualif ?'
+                }
                 echo "Hello World!"
             }
             when {
