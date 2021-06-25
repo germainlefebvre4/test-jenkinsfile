@@ -15,7 +15,7 @@ pipeline {
         stage('clean') {
             steps {
                 script {
-                    if (env.pullRequest.merged) {
+                    if (env.pullRequest.isMerged) {
                         stage {
                             echo "Delete namespace"
                             sh "wget -q https://dl.k8s.io/v1.20.6/kubernetes-client-linux-amd64.tar.gz; tar -zxvf kubernetes-client-linux-amd64.tar.gz; chmod +x kubernetes/client/bin/kubectl; mv kubernetes/client/bin/kubectl ."
