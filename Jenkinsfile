@@ -8,7 +8,7 @@ pipeline {
                 sh "hostname"
                 sh "uptime"
                 sh "wget https://dl.k8s.io/v1.21.2/kubernetes-client-linux-amd64.tar.gz; tar -zxvf kubernetes-client-linux-amd64.tar.gz; chmod +x kubernetes/client/bin/kubectl; mv kubernetes/client/bin/kubectl ."
-                sh "kubectl version"
+                sh "./kubectl version"
             }
         }
     }
