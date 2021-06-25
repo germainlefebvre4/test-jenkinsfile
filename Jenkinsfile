@@ -14,15 +14,21 @@ pipeline {
         }
         stage('clean') {
             steps {
-                echo "Delete namespace"
-                sh "wget https://dl.k8s.io/v1.20.6/kubernetes-client-linux-amd64.tar.gz; tar -zxvf kubernetes-client-linux-amd64.tar.gz; chmod +x kubernetes/client/bin/kubectl; mv kubernetes/client/bin/kubectl ."
-                sh "./kubectl version"
-                sh "./kubectl delete namespace test || true"
+                script {
+                    if (pullRequest.merged) {
+                        stage {
+                            echo "Delete namespace"
+                            sh "wget https://dl.k8s.io/v1.20.6/kubernetes-client-linux-amd64.tar.gz; tar -zxvf kubernetes-client-linux-amd64.tar.gz; chmod +x kubernetes/client/bin/kubectl; mv kubernetes/client/bin/kubectl ."
+                            sh "./kubectl version"
+                            sh "./kubectl delete namespace test || true"
+                        }
+                    }
+                }
             }
-            when {
-              branch 'feat/test-merge'
-              // pullRequest.merged
-            }
+//            when {
+//                branch 'feat/test-merge'
+//                // pullRequest.merged
+//            }
         }
     }
 }
