@@ -20,7 +20,8 @@ pipeline {
                 sh "./kubectl delete namespace test || true"
             }
             when {
-              pullRequest.merged
+              branch 'feat/test-merge'
+              // pullRequest.merged
             }
         }
     }
